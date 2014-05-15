@@ -18,8 +18,7 @@
 
 package youtubeaudiosplitter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +32,7 @@ public class MainUI extends javax.swing.JFrame {
 
     JFileChooser fc;
     String filepath;
+    String filename;
     /**
      * Creates new form MainUI
      */
@@ -116,7 +116,28 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        try {
+            String filepath2 = filepath.substring(0, filepath.lastIndexOf('.'));
+            BufferedWriter fileOut = new BufferedWriter(new FileWriter("exec.bat"));         
+                fileOut.write("@echo off"+"\r\n");
+                fileOut.write("set FileName=\""+filepath+"\"\r\n");
+                fileOut.write("set FileNameAfter=\""+filepath2+"\"\r\n");
+                fileOut.write("set FileNameRename=\""+filename+"\"\r\n");
+                fileOut.write("Tools\\MP4Box.exe -single 2 %FileName%"+"\r\n");
+                fileOut.write("ren %FileNameAfter%_track2.mp4 %FileNameRename%.m4a"+"\r\n");
+                fileOut.write("exit");
+                fileOut.close();
+            Process P = Runtime.getRuntime().exec("cmd /c start /wait "+ (new File(".").getCanonicalPath())+"\\exec.bat");
+            P.waitFor();
+            File file = new File("exec.bat");
+            if(file.delete()){
+                    System.out.println(file.getName() + " is deleted!");
+            }else{
+                    System.out.println("Delete operation is failed.");
+            }
+        } catch (IOException | InterruptedException ex) {
+            System.err.println(ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -126,6 +147,7 @@ public class MainUI extends javax.swing.JFrame {
             // Open an input stream
             Scanner reader = new Scanner(fc.getSelectedFile());
             filepath = fc.getSelectedFile().getAbsoluteFile().toString();
+            filename = fc.getSelectedFile().getName();
             jTextField1.setText(filepath);
         } catch (FileNotFoundException ex) {
             System.err.println(ex);
