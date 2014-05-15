@@ -127,7 +127,8 @@ public class MainUI extends javax.swing.JFrame {
                 fileOut.write("ren %FileNameAfter%_track2.mp4 %FileNameRename%.m4a"+"\r\n");
                 fileOut.write("exit");
                 fileOut.close();
-            Process P = Runtime.getRuntime().exec("cmd /c start /wait "+ (new File(".").getCanonicalPath())+"\\exec.bat");
+                String currentpath = new File(".").getCanonicalPath();
+            Process P = Runtime.getRuntime().exec("cmd /c start /wait "+currentpath+"\\exec.bat");
             P.waitFor();
             File file = new File("exec.bat");
             if(file.delete()){
