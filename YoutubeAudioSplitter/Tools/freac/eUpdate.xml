@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eUpdateConfig>
+ <info>
+  <property name="program">fre:ac - free audio converter</property>
+  <property name="language">internal</property>
+  <property name="showUnstable">0</property>
+ </info>
+ <seen>
+  <version id="v1.0.21a" from="v1.0.17,v1.0.17a,v1.0.18,v1.0.19,v1.0.20,v1.0.20a"/>
+ </seen>
+ <installed>
+  <version id="v1.0.21a" from="v1.0.17,v1.0.17a,v1.0.18,v1.0.19,v1.0.20,v1.0.20a"/>
+ </installed>
+</eUpdateConfig>
