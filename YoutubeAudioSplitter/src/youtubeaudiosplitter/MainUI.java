@@ -23,6 +23,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -141,21 +142,25 @@ public class MainUI extends javax.swing.JFrame {
                 fileOut.write("exit");
                 fileOut.close();
                 String currentpath = new File(".").getCanonicalPath();
-            Process P = Runtime.getRuntime().exec("cmd /c start /wait "+currentpath+"\\exec.bat");
+            String[] command = new String[6];
+            command[0] = "cmd";
+            command[1] = "/c";
+            command[2] = "start";
+            command[3] = "\"\"";
+            command[4] = "CALL";
+            command[5] = "\""+currentpath+"\\exec.bat\"";
+            Process P = new ProcessBuilder(command).start();
             P.waitFor();
-            File file = new File("exec.bat");
-            if(file.delete()){
-                    System.out.println(file.getName() + " is deleted!");
-            }else{
-                    System.out.println("Delete operation is failed.");
-            }
         } catch (IOException | InterruptedException ex) {
             System.err.println(ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        final JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MP4 Files", "mp4");
+        fc.setFileFilter(filter);
+        fc.setAcceptAllFileFilterUsed(false);
             fc.showOpenDialog(this);    
         try {
             // Open an input stream
@@ -179,14 +184,15 @@ public class MainUI extends javax.swing.JFrame {
                 fileOut.write("exit");
                 fileOut.close();
                 String currentpath = new File(".").getCanonicalPath();
-            Process P = Runtime.getRuntime().exec("cmd /c start /wait "+currentpath+"\\exec2.bat");
+            String[] command = new String[6];
+            command[0] = "cmd";
+            command[1] = "/c";
+            command[2] = "start";
+            command[3] = "\"\"";
+            command[4] = "CALL";
+            command[5] = "\""+currentpath+"\\exec.bat\"";
+            Process P = new ProcessBuilder(command).start();
             P.waitFor();
-            File file = new File("exec2.bat");
-            if(file.delete()){
-                    System.out.println(file.getName() + " is deleted!");
-            }else{
-                    System.out.println("Delete operation is failed.");
-            }
         } catch (IOException | InterruptedException ex) {
             System.err.println(ex);
         }
