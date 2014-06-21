@@ -190,7 +190,7 @@ public class MainUI extends javax.swing.JFrame {
             command[2] = "start";
             command[3] = "\"\"";
             command[4] = "CALL";
-            command[5] = "\""+currentpath+"\\exec.bat\"";
+            command[5] = "\""+currentpath+"\\exec2.bat\"";
             Process P = new ProcessBuilder(command).start();
             P.waitFor();
         } catch (IOException | InterruptedException ex) {
